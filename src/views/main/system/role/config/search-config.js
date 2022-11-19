@@ -1,5 +1,6 @@
 export const searchFormConfig = {
   labelWidth: '120px',
+  headerTitle: '角色查询',
   itemStyle: {
     padding: '10px 40px'
   },

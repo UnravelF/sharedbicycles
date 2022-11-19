@@ -102,7 +102,6 @@ export default {
   },
   watch: {
     modValue(value) {
-      console.log('子组件下拉框发生改变：', this.modValue)
       this.$emit('update:modelValue', this.modValue)
     }
   }

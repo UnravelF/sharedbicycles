@@ -21,9 +21,7 @@ setupStore()
 Vue.config.productionTip = false
 
 // 注册全局过滤器方法
-Object.keys(formatUtcString).forEach((key) =>
-  Vue.filter(key, formatUtcString[key])
-)
+Vue.filter('formatTime', formatUtcString)
 
 new Vue({
   render: (h) => h(App),

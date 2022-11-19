@@ -96,21 +96,28 @@ export default {
       type: Object,
       default: () => ({ currentPage: 0, pageSize: 10 })
     },
-    // 菜单栏是否需要展示二级菜单的属性
-    // childrenProps: {
-    //   type: Object,
-    //   default: () => ({})
-    // },
-    // 是否展示底部分页器 因为菜单列表一般不需要展示  其他列表一般需要展示 默认值为true  在配置文件中决定即可
+    model: {
+      prop: 'page',
+      event: 'update:page'
+    },
     showFooter: {
       type: Boolean,
       default: true
     }
   },
+  data() {
+    return {}
+  },
   methods: {
     handleSelectionChange() {},
-    handleSizeChange() {},
-    handleCurrentChange() {}
+    handleSizeChange(pageSize) {
+      console.log(pageSize)
+      this.$emit('update:page', { ...this.page, pageSize })
+    },
+    handleCurrentChange(currentPage) {
+      console.log(currentPage)
+      this.$emit('update:page', { ...this.page, currentPage })
+    }
   }
 }
 </script>

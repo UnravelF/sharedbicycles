@@ -1,6 +1,9 @@
 <template>
   <div class="page-search">
     <g-form v-bind="searchFormConfig" v-model="formData">
+      <template slot="header">
+        <h4>{{ searchFormConfig.headerTitle }}</h4>
+      </template>
       <template slot="footer">
         <div class="handle-btns">
           <el-button
@@ -46,7 +49,6 @@ export default {
         return formOriginData
       },
       set: function (newValue) {
-        console.log(newValue)
         return newValue
       }
     }
