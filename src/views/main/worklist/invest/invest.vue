@@ -10,6 +10,7 @@
       ref="pageContentRef"
       pageName="invest"
       :contentTableConfig="contentConfig"
+      :queryInfo="query"
     />
   </div>
 </template>
@@ -27,6 +28,11 @@ export default {
     PageSearch,
     PageContent
   },
+  data() {
+    return {
+      query: null
+    }
+  },
   computed: {
     searchConfig() {
       return searchFormConfig
@@ -38,10 +44,11 @@ export default {
   methods: {
     handleQueryClick(queryInfo) {
       console.log(queryInfo)
+      this.query = queryInfo
       this.$refs.pageContentRef.getPageData(queryInfo)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>

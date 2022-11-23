@@ -1,7 +1,8 @@
 import {
   getPageListData,
   getPageListCount,
-  queryPageListData
+  queryPageListData,
+  getQueryPageListDataCount
 } from '@/service/system'
 
 const systemModule = {
@@ -13,7 +14,9 @@ const systemModule = {
       usersList: [],
       usersCount: 0,
       investList: [],
-      investCount: 0
+      investCount: 0,
+      repairList: [],
+      repairCount: 0
     }
   },
   mutations: {
@@ -34,6 +37,12 @@ const systemModule = {
     },
     changeInvestCount(state, investCount) {
       state.investCount = investCount
+    },
+    changeRepairList(state, repairList) {
+      state.repairList = repairList
+    },
+    changeRepairCount(state, repairCount) {
+      state.repairCount = repairCount
     }
   },
   getters: {
@@ -65,7 +74,12 @@ const systemModule = {
         console.log(pageResult.data)
         // 返回数据
         const pageList = pageResult.data
-        const pageCount = pageResult.data.length
+        // 数据总数
+        const countResult = await getQueryPageListDataCount(
+          pageUrl + 'Count',
+          payload.queryInfo
+        )
+        const pageCount = countResult.data[0].count
 
         const changePageName =
           pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
@@ -74,13 +88,11 @@ const systemModule = {
       } else {
         const pageName = payload.pageName
         const pageUrl = `/${pageName}/list`
-
+        // 返回数据
         const pageResult = await getPageListData(pageUrl, payload.pageInfo)
-        console.log(pageResult.data)
         const pageList = pageResult.data
-
+        // 返回总数
         const countResult = await getPageListCount(pageUrl + 'Count')
-        console.log(countResult.data[0])
         const pageCount = countResult.data[0].count
 
         const changePageName =

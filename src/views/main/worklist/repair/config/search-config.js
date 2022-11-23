@@ -1,19 +1,16 @@
 export const searchFormConfig = {
   labelWidth: '120px',
-  headerTitle: '投放工单查询',
+  headerTitle: '维修工单查询',
   itemStyle: {
     padding: '10px 40px'
   },
-  // colLayout: {
-  //   span: 8
-  // },
   formItems: [
     {
       field: 'area',
       type: 'select',
-      label: '投放城市',
+      label: '申报点位',
       rules: [],
-      placeholder: '请选择城市名称',
+      placeholder: '请选择申报点位',
       options: [
         { label: '广州市天河区科韵路', value: '广州市天河区科韵路' },
         { label: '广州市天河区棠安路', value: '广州市天河区棠安路' },

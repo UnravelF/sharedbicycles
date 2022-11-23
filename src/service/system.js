@@ -33,3 +33,13 @@ export function queryPageListData(url, queryInfo, pageInfo) {
     }
   })
 }
+// 获取根据条件查询页面数据总数
+export function getQueryPageListDataCount(url, queryInfo) {
+  return request({
+    url: url,
+    method: 'post',
+    data: {
+      ...queryInfo
+    }
+  })
+}

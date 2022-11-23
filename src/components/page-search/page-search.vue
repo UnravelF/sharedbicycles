@@ -2,7 +2,7 @@
   <div class="page-search">
     <g-form v-bind="searchFormConfig" v-model="formData">
       <template slot="header">
-        <h4>{{ searchFormConfig.headerTitle }}</h4>
+        <h2>{{ searchFormConfig.headerTitle }}</h2>
       </template>
       <template slot="footer">
         <div class="handle-btns">

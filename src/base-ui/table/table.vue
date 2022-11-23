@@ -46,8 +46,8 @@
     <div class="footer" v-if="showFooter">
       <slot name="footer">
         <el-pagination
-          :currentPage="page.currentPage"
-          :page-size="page.pageSize"
+          v-model:current-page="page.currentPage"
+          v-model:page-size="page.pageSize"
           :page-sizes="[10, 20, 30]"
           layout="->,total, sizes, prev, pager, next, jumper"
           :total="listCount"
@@ -94,7 +94,8 @@ export default {
     // page-content绑定过来的分页器相关属性信息
     page: {
       type: Object,
-      default: () => ({ currentPage: 0, pageSize: 10 })
+      default: () => ({ currentPage: 1, pageSize: 10 })
+      // required: true
     },
     model: {
       prop: 'page',
@@ -106,17 +107,19 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      // pageInfo: this.page
+    }
   },
   methods: {
     handleSelectionChange() {},
     handleSizeChange(pageSize) {
-      console.log(pageSize)
-      this.$emit('update:page', { ...this.page, pageSize })
+      this.page.pageSize = pageSize
+      this.$emit('update:page', this.page)
     },
     handleCurrentChange(currentPage) {
-      console.log(currentPage)
-      this.$emit('update:page', { ...this.page, currentPage })
+      this.page.currentPage = currentPage
+      this.$emit('update:page', this.page)
     }
   }
 }

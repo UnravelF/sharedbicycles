@@ -95,11 +95,7 @@ export default {
       modValue: this.modelValue
     }
   },
-  methods: {
-    // handleValueChange(value, field) {
-    //   this.$emit('update:modelValue', { ...this.modelValue, [field]: value })
-    // }
-  },
+  methods: {},
   watch: {
     modValue(value) {
       this.$emit('update:modelValue', this.modValue)

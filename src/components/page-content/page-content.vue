@@ -4,7 +4,7 @@
       :listData="dataList"
       :listCount="dataCount"
       v-bind="contentTableConfig"
-      v-model="pageInfo"
+      :page="pageInfo"
     >
       <!-- header的插槽 -->
       <template slot="headerHandler">
@@ -30,6 +30,11 @@
       <template #put_time="scope">
         <span>{{ scope.row.put_time | formatTime }}</span>
       </template>
+      <!-- 状态 -->
+      <template #status="scope">
+        <span>{{ scope.row.status === 0 ? '未完成' : '已完成' }}</span>
+      </template>
+      <!-- 操作 -->
       <template #handler="">
         <div class="handle-btns">
           <el-button
@@ -70,11 +75,38 @@ export default {
     pageName: {
       type: String,
       required: true
+    },
+    queryInfo: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data() {
+    return {
+      page: { currentPage: 1, pageSize: 10 }
     }
   },
   created() {
     // 获取列表数据
     this.getPageData()
+  },
+  computed: {
+    // 列表数据
+    dataList() {
+      return this.$store.getters[`system/pageListData`](this.pageName)
+    },
+    // 列表数据总数
+    dataCount() {
+      return this.$store.getters[`system/pageListCount`](this.pageName)
+    },
+    pageInfo: {
+      get: function () {
+        return this.page
+      },
+      set: function (newValue) {
+        return newValue
+      }
+    }
   },
   methods: {
     getPageData(queryInfo) {
@@ -88,23 +120,10 @@ export default {
       this.getPageData()
     }
   },
-  computed: {
-    // 列表数据
-    dataList() {
-      return this.$store.getters[`system/pageListData`](this.pageName)
-    },
-    // 列表数据总数
-    dataCount() {
-      return this.$store.getters[`system/pageListCount`](this.pageName)
-    },
-    pageInfo() {
-      return { currentPage: 1, pageSize: 10 }
-    }
-  },
   watch: {
     pageInfo: {
       handler: function (val, oldVal) {
-        this.getPageData()
+        this.getPageData(this.queryInfo)
       },
       deep: true
     }

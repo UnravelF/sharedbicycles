@@ -18,6 +18,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/multi-word-component-names': 'off',
     'no-unused-vars': 'off',
-    'vue/valid-v-for': 'off'
+    'vue/valid-v-for': 'off',
+    'vue/no-v-model-argument': 'off',
+    'vue/no-mutating-props': 'off'
   }
 }
