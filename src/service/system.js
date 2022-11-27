@@ -43,3 +43,21 @@ export function getQueryPageListDataCount(url, queryInfo) {
     }
   })
 }
+
+// 新建列表数据
+export function createPageData(url, newData) {
+  return request({
+    url: url,
+    method: 'post',
+    data: newData
+  })
+}
+
+// 编辑列表数据
+export function editPageData(url, editData) {
+  return request({
+    url: url,
+    method: 'patch',
+    data: editData
+  })
+}

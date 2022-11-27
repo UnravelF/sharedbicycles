@@ -2,7 +2,9 @@ import {
   getPageListData,
   getPageListCount,
   queryPageListData,
-  getQueryPageListDataCount
+  getQueryPageListDataCount,
+  createPageData,
+  editPageData
 } from '@/service/system'
 
 const systemModule = {
@@ -16,7 +18,9 @@ const systemModule = {
       investList: [],
       investCount: 0,
       repairList: [],
-      repairCount: 0
+      repairCount: 0,
+      suppliersList: [],
+      suppliersCount: 0
     }
   },
   mutations: {
@@ -43,6 +47,12 @@ const systemModule = {
     },
     changeRepairCount(state, repairCount) {
       state.repairCount = repairCount
+    },
+    changeSuppliersList(state, suppliersList) {
+      state.suppliersList = suppliersList
+    },
+    changeSuppliersCount(state, suppliersCount) {
+      state.suppliersCount = suppliersCount
     }
   },
   getters: {
@@ -71,7 +81,6 @@ const systemModule = {
           payload.queryInfo,
           payload.pageInfo
         )
-        console.log(pageResult.data)
         // 返回数据
         const pageList = pageResult.data
         // 数据总数
@@ -100,6 +109,33 @@ const systemModule = {
         commit(`change${changePageName}List`, pageList)
         commit(`change${changePageName}Count`, pageCount)
       }
+    },
+
+    // 新建列表数据
+    async createPageDataAction({ dispatch }, payload) {
+      // 获取新建数据
+      const { pageName, newData } = payload
+      const pageUrl = `/${pageName}`
+      // 发送请求
+      console.log(newData)
+      await createPageData(pageUrl, newData)
+      // 重新请求列表数据
+      dispatch('getPageListAction', {
+        pageName,
+        pageInfo: {
+          currentPage: 1,
+          pageSize: 10
+        }
+      })
+    },
+
+    // 编辑列表数据
+    async editPageDataAction({ dispatch }, payload) {
+      // 获取编辑数据
+      const { pageName, editData, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      // 发送请求
+      console.log(editData)
     }
   }
 }

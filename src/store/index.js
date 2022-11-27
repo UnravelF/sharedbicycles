@@ -5,10 +5,43 @@ import Vuex from 'vuex'
 import login from './login/login'
 import system from './system/system'
 
+import { getPageListData } from '@/service/system'
+
 Vue.use(Vuex)
 const store = new Vuex.Store({
   state: () => {
-    return {}
+    return {
+      cityList: [],
+      suppliersList: []
+    }
+  },
+  mutations: {
+    changeCityList(state, cityList) {
+      state.cityList = cityList
+    },
+    changeSuppliersList(state, suppliersList) {
+      state.suppliersList = suppliersList
+    }
+  },
+  actions: {
+    async getInitialDataAction({ commit }) {
+      // 1. 请求城市点位、供应商数据
+      const cityResult = await getPageListData('/city/list', {
+        currentPage: 1,
+        pageSize: 100
+      })
+      const cityList = cityResult.data
+      const suppliersResult = await getPageListData('/suppliers/list', {
+        currentPage: 1,
+        pageSize: 100
+      })
+      const suppliersList = suppliersResult.data
+      console.log(cityList)
+      console.log(suppliersList)
+      // 2. 保存数据
+      commit('changeCityList', cityList)
+      commit('changeSuppliersList', suppliersList)
+    }
   },
   modules: {
     login,
@@ -18,6 +51,7 @@ const store = new Vuex.Store({
 // 解决刷新后 vuex重新获取本地存储数据
 export function setupStore() {
   store.dispatch('login/loadLocalLogin')
+  store.dispatch('getInitialDataAction')
 }
 
 export default store

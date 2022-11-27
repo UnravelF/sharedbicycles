@@ -8,7 +8,7 @@
     >
       <!-- header的插槽 -->
       <template slot="headerHandler">
-        <el-button type="primary" size="small">
+        <el-button type="primary" size="small" @click="handleNewClick">
           {{ contentTableConfig.handleTitle }}</el-button
         >
         <el-button
@@ -35,7 +35,7 @@
         <span>{{ scope.row.status === 0 ? '未完成' : '已完成' }}</span>
       </template>
       <!-- 操作 -->
-      <template #handler="">
+      <template #handler="scope">
         <div class="handle-btns">
           <el-button
             icon="el-icon-edit-outline"
@@ -43,6 +43,7 @@
             link
             type="text"
             class="edit"
+            @click="handleEditClick(scope.row)"
             >编辑</el-button
           >
           <el-button
@@ -116,8 +117,17 @@ export default {
         pageInfo: this.pageInfo
       })
     },
+    // 重置按钮
     handleResetClick() {
       this.getPageData()
+    },
+    // 新建操作
+    handleNewClick() {
+      this.$emit('newBtnClick')
+    },
+    // 编辑操作
+    handleEditClick(item) {
+      this.$emit('editBtnClick', item)
     }
   },
   watch: {
