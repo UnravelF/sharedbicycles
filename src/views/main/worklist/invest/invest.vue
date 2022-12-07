@@ -97,6 +97,9 @@ export default {
     handleEditData(item) {
       this.defaultInfo = { ...item }
       console.log(this.defaultInfo)
+      // 赋值对应品牌和点位id
+      this.defaultInfo.area = this.defaultInfo.cityid
+      this.defaultInfo.brand = this.defaultInfo.brandid
       this.$refs.pageModalRef.dialogVisible = true
       // 编辑不显示密码输入框
       // const areaItem = this.modalConfig.formItems.find(

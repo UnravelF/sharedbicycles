@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
 import GForm from '../../base-ui/form/form.vue'
 
 export default {
@@ -64,6 +65,9 @@ export default {
       set: function (newValue) {
         return newValue
       }
+    },
+    handleResult() {
+      return this.$store.state.system.handleResult
     }
   },
   methods: {
@@ -75,7 +79,7 @@ export default {
         // 编辑
         this.$store.dispatch('system/editPageDataAction', {
           pageName: this.pageName,
-          editData: this.formData,
+          editData: { ...this.formData },
           id: this.defaultInfo.id
         })
       } else {
@@ -85,6 +89,22 @@ export default {
           newData: this.formData
         })
       }
+      this.$nextTick(() => {
+        console.log(this.handleResult)
+        console.log(this.handleResult.statusCode)
+        // 修改后进行效果展示
+        if (this.handleResult.statusCode === 200) {
+          this.$message({
+            message: this.handleResult.message,
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: this.handleResult.message,
+            type: 'warning'
+          })
+        }
+      })
     }
   },
   watch: {

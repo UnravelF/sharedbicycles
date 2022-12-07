@@ -15,11 +15,7 @@ export const modalConfig = {
       label: '品牌',
       rules: [],
       placeholder: '请选择品牌名称',
-      options: [
-        // { label: '滴滴', value: '滴滴' },
-        // { label: '美团', value: '美团' },
-        // { label: '青桔', value: '青桔' }
-      ]
+      options: []
     },
     {
       field: 'status',

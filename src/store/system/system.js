@@ -20,7 +20,9 @@ const systemModule = {
       repairList: [],
       repairCount: 0,
       suppliersList: [],
-      suppliersCount: 0
+      suppliersCount: 0,
+      // 存取操作返回状态
+      handleResult: null
     }
   },
   mutations: {
@@ -53,6 +55,9 @@ const systemModule = {
     },
     changeSuppliersCount(state, suppliersCount) {
       state.suppliersCount = suppliersCount
+    },
+    changeHandleResult(state, handleResult) {
+      state.handleResult = handleResult
     }
   },
   getters: {
@@ -112,13 +117,15 @@ const systemModule = {
     },
 
     // 新建列表数据
-    async createPageDataAction({ dispatch }, payload) {
+    async createPageDataAction({ commit, dispatch }, payload) {
       // 获取新建数据
       const { pageName, newData } = payload
       const pageUrl = `/${pageName}`
       // 发送请求
       console.log(newData)
-      await createPageData(pageUrl, newData)
+      const result = await createPageData(pageUrl, newData)
+      // 存取操作结果
+      commit('changeHandleResult', result)
       // 重新请求列表数据
       dispatch('getPageListAction', {
         pageName,
@@ -130,12 +137,24 @@ const systemModule = {
     },
 
     // 编辑列表数据
-    async editPageDataAction({ dispatch }, payload) {
+    async editPageDataAction({ commit, dispatch }, payload) {
       // 获取编辑数据
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
       // 发送请求
       console.log(editData)
+      const result = await editPageData(pageUrl, editData)
+      console.log(result)
+      // 存取操作结果
+      commit('changeHandleResult', result)
+      // 重新请求列表数据
+      dispatch('getPageListAction', {
+        pageName,
+        pageInfo: {
+          currentPage: 1,
+          pageSize: 10
+        }
+      })
     }
   }
 }

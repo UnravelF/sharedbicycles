@@ -40,10 +40,6 @@ export default {
   },
   computed: {
     formData: {
-      // const formOriginData = {}
-      // for (const item of this.formItems) {
-      //   formOriginData[`${item.field}`] = ''
-      // }
       get: function () {
         const formOriginData = this.originData()
         return formOriginData

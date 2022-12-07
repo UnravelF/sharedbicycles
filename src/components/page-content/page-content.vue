@@ -90,6 +90,8 @@ export default {
   created() {
     // 获取列表数据
     this.getPageData()
+    // 获取动态选项数据
+    this.$store.dispatch('getInitialDataAction')
   },
   computed: {
     // 列表数据
