@@ -61,3 +61,10 @@ export function editPageData(url, editData) {
     data: editData
   })
 }
+// 删除列表数据
+export function deletePageData(url) {
+  return request({
+    url: url,
+    method: 'delete'
+  })
+}

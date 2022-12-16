@@ -4,7 +4,8 @@ import {
   queryPageListData,
   getQueryPageListDataCount,
   createPageData,
-  editPageData
+  editPageData,
+  deletePageData
 } from '@/service/system'
 
 const systemModule = {
@@ -142,10 +143,27 @@ const systemModule = {
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
       // 发送请求
-      console.log(editData)
       const result = await editPageData(pageUrl, editData)
-      console.log(result)
       // 存取操作结果
+      commit('changeHandleResult', result)
+      // 重新请求列表数据
+      dispatch('getPageListAction', {
+        pageName,
+        pageInfo: {
+          currentPage: 1,
+          pageSize: 10
+        }
+      })
+    },
+
+    // 删除列表数据
+    async deletePageDataAction({ commit, dispatch }, payload) {
+      // 获取指定删除的列表数据Id
+      const { pageName, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      // 发送请求
+      const result = await deletePageData(pageUrl)
+      // 存取操作结果状态
       commit('changeHandleResult', result)
       // 重新请求列表数据
       dispatch('getPageListAction', {

@@ -72,39 +72,35 @@ export default {
   },
   methods: {
     // 确定事件
-    handleConfirmClick() {
+    async handleConfirmClick() {
       this.dialogVisible = false
       // 区分新建确定还是编辑确定
       if (Object.keys(this.defaultInfo).length) {
         // 编辑
-        this.$store.dispatch('system/editPageDataAction', {
+        await this.$store.dispatch('system/editPageDataAction', {
           pageName: this.pageName,
           editData: { ...this.formData },
           id: this.defaultInfo.id
         })
       } else {
         // 新建列表数据
-        this.$store.dispatch('system/createPageDataAction', {
+        await this.$store.dispatch('system/createPageDataAction', {
           pageName: this.pageName,
           newData: this.formData
         })
       }
-      this.$nextTick(() => {
-        console.log(this.handleResult)
-        console.log(this.handleResult.statusCode)
-        // 修改后进行效果展示
-        if (this.handleResult.statusCode === 200) {
-          this.$message({
-            message: this.handleResult.message,
-            type: 'success'
-          })
-        } else {
-          this.$message({
-            message: this.handleResult.message,
-            type: 'warning'
-          })
-        }
-      })
+      // 修改后进行效果展示
+      if (this.handleResult.statusCode === 200) {
+        this.$message({
+          message: this.handleResult.message,
+          type: 'success'
+        })
+      } else {
+        this.$message({
+          message: this.handleResult.message,
+          type: 'warning'
+        })
+      }
     }
   },
   watch: {

@@ -52,6 +52,7 @@
             link
             type="text"
             class="delete"
+            @click="handleDeleteClick(scope.row)"
             >删除</el-button
           >
         </div>
@@ -109,6 +110,9 @@ export default {
       set: function (newValue) {
         return newValue
       }
+    },
+    handleResult() {
+      return this.$store.state.system.handleResult
     }
   },
   methods: {
@@ -130,6 +134,25 @@ export default {
     // 编辑操作
     handleEditClick(item) {
       this.$emit('editBtnClick', item)
+    },
+    // 删除操作
+    async handleDeleteClick(item) {
+      await this.$store.dispatch('system/deletePageDataAction', {
+        pageName: this.pageName,
+        id: item.id
+      })
+      // 修改后进行效果展示
+      if (this.handleResult.statusCode === 200) {
+        this.$message({
+          message: this.handleResult.message,
+          type: 'success'
+        })
+      } else {
+        this.$message({
+          message: this.handleResult.message,
+          type: 'warning'
+        })
+      }
     }
   },
   watch: {
