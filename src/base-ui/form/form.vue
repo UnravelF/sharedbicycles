@@ -5,15 +5,16 @@
       <slot name="header"></slot>
     </div>
     <!-- 表单搜索内容 -->
-    <el-form :label-width="labelWidth">
+    <el-form :label-width="labelWidth" :model="modValue">
       <el-row>
         <template v-for="item in formItems">
           <el-col v-bind="colLayout">
             <el-form-item
               :label="item.label"
-              :rules="item.rules"
               :style="itemStyle"
               v-if="!item.isHidden"
+              :rules="item.rules"
+              :prop="item.field"
             >
               <template
                 v-if="item.type === 'input' || item.type === 'password'"
@@ -57,6 +58,8 @@
 </template>
 
 <script>
+import { rules } from '@/utils/rules'
+
 export default {
   name: 'Form',
   props: {
@@ -93,12 +96,14 @@ export default {
   },
   data() {
     return {
-      modValue: this.modelValue
+      modValue: this.modelValue,
+      rules
     }
   },
   methods: {},
   watch: {
     modValue(value) {
+      console.log(this.modValue[0].field)
       this.$emit('update:modelValue', this.modValue)
     }
   }
