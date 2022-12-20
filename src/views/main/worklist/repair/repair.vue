@@ -89,8 +89,14 @@ export default {
       this.getOptions()
     },
     // 编辑维修列表事件
-    handleEditData() {
-      console.log(2)
+    handleEditData(item) {
+      this.defaultInfo = { ...item }
+      console.log(this.defaultInfo)
+      // 赋值对应品牌和点位id
+      this.defaultInfo.area = this.defaultInfo.cityid
+      this.defaultInfo.brand = this.defaultInfo.brandid
+      this.$refs.pageModalRef.dialogVisible = true
+      this.getOptions()
     }
   }
 }

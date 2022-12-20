@@ -22,45 +22,5 @@ export const rules = {
       message: '用户名必须是3位以上的字母或数字~',
       trigger: 'blur'
     }
-  ],
-  area: [
-    {
-      required: true,
-      message: '请选择城市',
-      trigger: 'change'
-    }
-  ],
-  brand: [
-    {
-      required: true,
-      message: '请选择品牌',
-      trigger: 'change'
-    }
-  ],
-  status: [
-    {
-      required: true,
-      message: '请设置工单状态',
-      trigger: 'change'
-    }
-  ],
-  put_amount: [
-    {
-      required: true,
-      message: '投放数量不能为空',
-      trigger: 'blur'
-    }
-  ],
-  amount: [
-    {
-      required: true,
-      message: '维修数量不能为空',
-      trigger: 'blur'
-    },
-    {
-      pattern: /^[3-9][0-9]{2,}$/,
-      message: '申报数量至少要30以上~',
-      trigger: 'blur'
-    }
   ]
 }

@@ -58,8 +58,6 @@
 </template>
 
 <script>
-import { rules } from '@/utils/rules'
-
 export default {
   name: 'Form',
   props: {
@@ -96,8 +94,7 @@ export default {
   },
   data() {
     return {
-      modValue: this.modelValue,
-      rules
+      modValue: this.modelValue
     }
   },
   methods: {},

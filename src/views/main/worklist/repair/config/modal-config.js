@@ -10,7 +10,7 @@ export const modalConfig = {
         {
           required: true,
           message: '请选择城市',
-          trigger: 'change'
+          trigger: ['blur', 'change']
         }
       ]
       // isHidden: true
@@ -25,7 +25,7 @@ export const modalConfig = {
         {
           required: true,
           message: '请选择品牌',
-          trigger: 'change'
+          trigger: ['blur', 'change']
         }
       ]
     },
@@ -42,7 +42,7 @@ export const modalConfig = {
         {
           required: true,
           message: '请设置工单状态',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }
       ]
     },
@@ -55,11 +55,6 @@ export const modalConfig = {
         {
           required: true,
           message: '维修数量不能为空',
-          trigger: 'blur'
-        },
-        {
-          pattern: /^[3-9][0-9]{1,}$/,
-          message: '申报数量至少要30以上~',
           trigger: 'blur'
         }
       ]

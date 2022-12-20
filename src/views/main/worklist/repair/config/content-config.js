@@ -5,7 +5,7 @@ export const contentTableConfig = {
     { prop: 'id', label: 'ID', minWidth: '100' },
     { prop: 'area', label: '投放城市', minWidth: '100' },
     { prop: 'brand', label: '供应商', minWidth: '100' },
-    { prop: 'repair_amount', label: '维修数量', minWidth: '100' },
+    { prop: 'amount', label: '维修数量', minWidth: '100' },
     {
       prop: 'apply_time',
       label: '申报时间',
