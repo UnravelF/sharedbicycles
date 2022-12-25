@@ -4,7 +4,13 @@ export const modalConfig = {
       field: 'area',
       type: 'select',
       label: '投放城市',
-      rules: [],
+      rules: [
+        {
+          required: true,
+          message: '请选择城市',
+          trigger: ['blur', 'change']
+        }
+      ],
       placeholder: '请选择城市名称',
       options: []
     },
@@ -12,7 +18,13 @@ export const modalConfig = {
       field: 'brand',
       type: 'select',
       label: '品牌',
-      rules: [],
+      rules: [
+        {
+          required: true,
+          message: '请选择品牌',
+          trigger: ['blur', 'change']
+        }
+      ],
       placeholder: '请选择品牌名称',
       options: []
     },
@@ -20,7 +32,13 @@ export const modalConfig = {
       field: 'status',
       type: 'select',
       label: '工单状态',
-      rules: [],
+      rules: [
+        {
+          required: true,
+          message: '请选择工单状态',
+          trigger: ['blur', 'change']
+        }
+      ],
       placeholder: '请选择工单状态',
       options: [
         { label: '已完成', value: 1 },
@@ -31,7 +49,13 @@ export const modalConfig = {
       field: 'put_amount',
       type: 'input',
       label: '投放数量',
-      rules: [],
+      rules: [
+        {
+          required: true,
+          message: '投放数量不能为空',
+          trigger: 'blur'
+        }
+      ],
       placeholder: '请输入投放数量'
     }
   ],
