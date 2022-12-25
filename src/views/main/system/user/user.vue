@@ -80,7 +80,15 @@ export default {
       this.$refs.pageModalRef.dialogVisible = true
     },
     handleEditData(item) {
-      console.log(item)
+      this.getOptions()
+      // 新建用户时隐藏密码框项
+      const passwordItem = this.modalConfig.formItems.find(
+        (item) => item.field === 'password'
+      )
+      passwordItem.isHidden = true
+      // 复制对应信息
+      this.defaultInfo = { ...item }
+      this.defaultInfo.role = this.defaultInfo.role_id
       this.$refs.pageModalRef.dialogVisible = true
     }
   }

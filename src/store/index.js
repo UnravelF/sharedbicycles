@@ -49,7 +49,6 @@ const store = new Vuex.Store({
           pageSize: 100
         })
         const roleList = roleResult.data
-        console.log(roleList)
         // 2. 保存数据
         commit('changeCityList', cityList)
         commit('changeSuppliersList', suppliersList)
