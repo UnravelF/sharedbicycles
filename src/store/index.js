@@ -13,7 +13,8 @@ const store = new Vuex.Store({
   state: () => {
     return {
       cityList: [],
-      suppliersList: []
+      suppliersList: [],
+      roleList: []
     }
   },
   mutations: {
@@ -22,6 +23,9 @@ const store = new Vuex.Store({
     },
     changeSuppliersList(state, suppliersList) {
       state.suppliersList = suppliersList
+    },
+    changeRoleList(state, roleList) {
+      state.roleList = roleList
     }
   },
   actions: {
@@ -32,15 +36,24 @@ const store = new Vuex.Store({
           currentPage: 1,
           pageSize: 100
         })
+        // 城市点位
         const cityList = cityResult.data
         const suppliersResult = await getPageListData('/suppliers/list', {
           currentPage: 1,
           pageSize: 100
         })
         const suppliersList = suppliersResult.data
+        // 角色点位
+        const roleResult = await getPageListData('/role/list', {
+          currentPage: 1,
+          pageSize: 100
+        })
+        const roleList = roleResult.data
+        console.log(roleList)
         // 2. 保存数据
         commit('changeCityList', cityList)
         commit('changeSuppliersList', suppliersList)
+        commit('changeRoleList', roleList)
       } else {
         return
       }

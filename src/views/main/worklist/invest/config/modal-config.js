@@ -7,7 +7,6 @@ export const modalConfig = {
       rules: [],
       placeholder: '请选择城市名称',
       options: []
-      // isHidden: true
     },
     {
       field: 'brand',

@@ -86,11 +86,6 @@ export default {
       // 新建时重新赋值空对象
       this.defaultInfo = {}
       this.$refs.pageModalRef.dialogVisible = true
-      // 新建显示密码输入框
-      // const areaItem = this.modalConfig.formItems.find(
-      //   (item) => item.field === 'area'
-      // )
-      // areaItem.isHidden = false
       this.getOptions()
     },
     // 编辑列表数据事件
@@ -101,11 +96,6 @@ export default {
       this.defaultInfo.area = this.defaultInfo.cityid
       this.defaultInfo.brand = this.defaultInfo.brandid
       this.$refs.pageModalRef.dialogVisible = true
-      // 编辑不显示密码输入框
-      // const areaItem = this.modalConfig.formItems.find(
-      //   (item) => item.field === 'area'
-      // )
-      // areaItem.isHidden = true
       this.getOptions()
     }
   }
