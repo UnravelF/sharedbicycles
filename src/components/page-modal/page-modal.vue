@@ -77,6 +77,13 @@ export default {
       // 区分新建确定还是编辑确定
       if (Object.keys(this.defaultInfo).length) {
         // 编辑
+        if (this.pageName === 'suppliers') {
+          this.$message({
+            message: '改操作暂无权限',
+            type: 'error'
+          })
+          return
+        }
         await this.$store.dispatch('system/editPageDataAction', {
           pageName: this.pageName,
           editData: { ...this.formData },
