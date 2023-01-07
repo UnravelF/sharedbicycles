@@ -11,27 +11,39 @@
       pageName="suppliers"
       :contentTableConfig="contentConfig"
       :queryInfo="query"
-      class="page-content"
+      @newBtnClick="handleNewData"
+      @editBtnClick="handleEditData"
     />
+    <!-- 新建/编辑供应商表单 -->
+    <page-modal
+      ref="pageModalRef"
+      pageName="suppliers"
+      :modal-config="modalConfig"
+      :default-info="defaultInfo"
+    ></page-modal>
   </div>
 </template>
 
 <script>
 import pageSearch from '@/components/page-search/page-search.vue'
 import PageContent from '@/components/page-content/page-content.vue'
+import pageModal from '@/components/page-modal/page-modal.vue'
 
 import { searchFormConfig } from './config/search-config'
 import { contentTableConfig } from './config/content-config'
+import { modalConfig } from './config/modal-config'
 
 export default {
   name: 'Suppliers',
   components: {
     pageSearch,
-    PageContent
+    PageContent,
+    pageModal
   },
   data() {
     return {
-      query: null
+      query: null,
+      defaultInfo: {}
     }
   },
   computed: {
@@ -40,13 +52,27 @@ export default {
     },
     contentConfig() {
       return contentTableConfig
+    },
+    modalConfig() {
+      return modalConfig
     }
   },
   methods: {
     handleQueryClick(queryInfo) {
-      console.log(queryInfo)
       this.query = queryInfo
       this.$refs.pageContentRef.getPageData(queryInfo)
+    },
+    // 新建供应商
+    handleNewData() {
+      // 新建时重新赋值空对象
+      this.defaultInfo = {}
+      this.$refs.pageModalRef.dialogVisible = true
+    },
+    // 编辑供应商
+    handleEditData(item) {
+      this.defaultInfo = { ...item }
+      console.log(this.defaultInfo)
+      this.$refs.pageModalRef.dialogVisible = true
     }
   }
 }

@@ -14,7 +14,7 @@
       @newBtnClick="handleNewData"
       @editBtnClick="handleEditData"
     />
-    <!-- 新建用户表单 -->
+    <!-- 新建/编辑用户表单 -->
     <page-modal
       ref="pageModalRef"
       pageName="invest"
