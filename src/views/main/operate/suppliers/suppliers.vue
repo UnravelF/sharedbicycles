@@ -71,7 +71,6 @@ export default {
     // 编辑供应商
     handleEditData(item) {
       this.defaultInfo = { ...item }
-      console.log(this.defaultInfo)
       this.$refs.pageModalRef.dialogVisible = true
     }
   }
