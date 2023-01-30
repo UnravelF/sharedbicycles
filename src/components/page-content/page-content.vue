@@ -34,6 +34,14 @@
       <template #status="scope">
         <span>{{ scope.row.status === 0 ? '未完成' : '已完成' }}</span>
       </template>
+      <!-- 设备开关锁 -->
+      <template #lock_status="scope">
+        <span>{{ scope.row.lock_status === 0 ? '开锁' : '关锁' }}</span>
+      </template>
+      <!-- 设备是否损坏 -->
+      <template #break_status="scope">
+        <span>{{ scope.row.break_status === 0 ? '完好' : '损坏' }}</span>
+      </template>
       <!-- 操作 -->
       <template #handler="scope">
         <div class="handle-btns">
