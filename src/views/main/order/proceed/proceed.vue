@@ -1,10 +1,34 @@
 <template>
-  <div>proceed页面</div>
+  <div class="proceed">
+    <!-- 列表 -->
+    <page-content
+      ref="pageContentRef"
+      pageName="order"
+      :contentTableConfig="contentConfig"
+      :queryInfo="query"
+    />
+  </div>
 </template>
 
 <script>
+import PageContent from '@/components/page-content/page-content.vue'
+import { contentTableConfig } from './config/content-config'
+
 export default {
-  name: 'proceed'
+  name: 'proceed',
+  components: {
+    PageContent
+  },
+  data() {
+    return {
+      query: null
+    }
+  },
+  computed: {
+    contentConfig() {
+      return contentTableConfig
+    }
+  }
 }
 </script>
 

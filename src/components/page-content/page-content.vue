@@ -30,6 +30,18 @@
       <template #put_time="scope">
         <span>{{ scope.row.put_time | formatTime }}</span>
       </template>
+      <!-- 申报时间 -->
+      <template #apply_time="scope">
+        <span>{{ scope.row.apply_time | formatTime }}</span>
+      </template>
+      <!-- 设备开锁时间 -->
+      <template #unlock_time="scope">
+        <span>{{ scope.row.unlock_time | formatTime }}</span>
+      </template>
+      <!-- 设备关锁时间 -->
+      <template #lock_time="scope">
+        <span>{{ scope.row.lock_time | formatTime }}</span>
+      </template>
       <!-- 状态 -->
       <template #status="scope">
         <span>{{ scope.row.status === 0 ? '未完成' : '已完成' }}</span>
@@ -41,6 +53,10 @@
       <!-- 设备是否损坏 -->
       <template #break_status="scope">
         <span>{{ scope.row.break_status === 0 ? '完好' : '损坏' }}</span>
+      </template>
+      profit
+      <template #profit="scope">
+        <span>￥{{ scope.row.profit }}</span>
       </template>
       <!-- 操作 -->
       <template #handler="scope">

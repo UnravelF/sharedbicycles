@@ -24,6 +24,10 @@ const systemModule = {
       suppliersCount: 0,
       bicycleList: [],
       bicycleCount: 0,
+      orderList: [],
+      orderCount: 0,
+      finishList: [],
+      finishCount: 0,
       // 存取操作返回状态
       handleResult: null
     }
@@ -64,6 +68,18 @@ const systemModule = {
     },
     changeBicycleCount(state, bicycleCount) {
       state.bicycleCount = bicycleCount
+    },
+    changeOrderList(state, orderList) {
+      state.orderList = orderList
+    },
+    changeOrderCount(state, orderCount) {
+      state.orderCount = orderCount
+    },
+    changeFinishList(state, finishList) {
+      state.finishList = finishList
+    },
+    changeFinishCount(state, finishCount) {
+      state.finishCount = finishCount
     },
     changeHandleResult(state, handleResult) {
       state.handleResult = handleResult
