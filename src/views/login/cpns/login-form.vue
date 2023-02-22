@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     loginAction(iskeepPassword) {
-      this.$refs['formRef'].validate((valid) => {
+      this.$refs['formRef'].validate(async (valid) => {
         if (valid) {
           // 验证登录时的用户选择
           if (iskeepPassword) {
@@ -46,7 +46,10 @@ export default {
             localCache.deleteCache('password')
           }
           // 开始验证登录
-          this.$store.dispatch('login/userLoginAction', { ...this.user })
+          await this.$store.dispatch('login/userLoginAction', { ...this.user })
+          if (this.$store.state.login.loginStatus) {
+            this.$message.error('用户名或密码错误')
+          }
         }
       })
     }

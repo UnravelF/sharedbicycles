@@ -9,10 +9,14 @@ const loginModule = {
     return {
       token: '',
       userInfo: {},
-      userMenus: []
+      userMenus: [],
+      loginStatus: false
     }
   },
   mutations: {
+    changeLoginStatus(state, result) {
+      state.loginStatus = result
+    },
     changeToken(state, token) {
       state.token = token
     },
@@ -33,25 +37,30 @@ const loginModule = {
   actions: {
     async userLoginAction({ commit }, payload) {
       const loginResult = await login({ ...payload })
-      const { token, role_id } = loginResult
+      if (loginResult.message || loginResult.state === 404) {
+        commit('changeLoginStatus', true)
+        return
+      } else {
+        const { token, role_id } = loginResult
 
-      // 获取到token存取到vuex
-      commit('changeToken', token)
-      localCache.setCache('token', token)
+        // 获取到token存取到vuex
+        commit('changeToken', token)
+        localCache.setCache('token', token)
 
-      // 存取登录用户信息
-      const userInfo = loginResult
-      commit('changeUserInfo', loginResult)
-      localCache.setCache('userInfo', userInfo)
+        // 存取登录用户信息
+        const userInfo = loginResult
+        commit('changeUserInfo', loginResult)
+        localCache.setCache('userInfo', userInfo)
 
-      // 根据用户角色id获取用户菜单
-      const menusResult = await getMenusByRoleId(role_id)
-      const userMenus = menusResult.data[0].roleMenus
-      commit('changeUserMenus', userMenus)
-      localCache.setCache('userMenus', userMenus)
+        // 根据用户角色id获取用户菜单
+        const menusResult = await getMenusByRoleId(role_id)
+        const userMenus = menusResult.data[0].roleMenus
+        commit('changeUserMenus', userMenus)
+        localCache.setCache('userMenus', userMenus)
 
-      // 登录成功 跳转首页
-      router.push('/main')
+        // 登录成功 跳转首页
+        router.push('/main')
+      }
     },
     // 重新刷新后 自动获取本地缓存的数据
     loadLocalLogin({ commit }) {

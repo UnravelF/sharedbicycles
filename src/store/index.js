@@ -29,7 +29,7 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async getInitialDataAction({ commit }) {
+    async getInitialDataAction({ commit, dispatch }) {
       if (store.state.login.token) {
         // 1. 请求城市点位、供应商数据
         const cityResult = await getPageListData('/city/list', {
@@ -53,6 +53,15 @@ const store = new Vuex.Store({
         commit('changeCityList', cityList)
         commit('changeSuppliersList', suppliersList)
         commit('changeRoleList', roleList)
+
+        // 解决数据统计页面无法获取数据
+        const pageNames = ['order', 'finish', 'invest', 'repair']
+        pageNames.map((item) => {
+          dispatch(`system/getPageListAction`, {
+            pageName: item,
+            pageInfo: { currentPage: 1, pageSize: 10 }
+          })
+        })
       } else {
         return
       }
