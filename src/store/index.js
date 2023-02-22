@@ -56,8 +56,8 @@ const store = new Vuex.Store({
 
         // 解决数据统计页面无法获取数据
         const pageNames = ['order', 'finish', 'invest', 'repair']
-        pageNames.map((item) => {
-          dispatch(`system/getPageListAction`, {
+        pageNames.map(async (item) => {
+          await dispatch(`system/getPageListAction`, {
             pageName: item,
             pageInfo: { currentPage: 1, pageSize: 10 }
           })

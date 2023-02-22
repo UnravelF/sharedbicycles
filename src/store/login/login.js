@@ -41,6 +41,8 @@ const loginModule = {
         commit('changeLoginStatus', true)
         return
       } else {
+        commit('changeLoginStatus', false)
+
         const { token, role_id } = loginResult
 
         // 获取到token存取到vuex
